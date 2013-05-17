@@ -1,0 +1,56 @@
+** Master input
+**
+** Input meshes
+******************
+*INCLUDE, INPUT=struct_all.msh
+*INCLUDE, INPUT=block1.msh
+*INCLUDE, INPUT=block2.msh
+*INCLUDE, INPUT=support.msh
+*INCLUDE, INPUT=peen.msh
+**
+** Import Sym_sets
+******************
+*INCLUDE, INPUT=Sym_X.nam
+*INCLUDE, INPUT=Sym_Y.nam
+**
+*NSET, NSET=RefSup
+1
+*NSET, NSET=RotSup
+2
+*NSET, NSET=RefPee
+3
+*NSET, NSET=RotPee
+4
+**
+** Sections
+******************
+** laminate
+*SHELL SECTION, ELSET=Estruct_all, COMPOSITE, OFFSET=-0.5, ORIENTATION=ORI1
+0.4, , Ply, 
+**
+** block 1 and 2
+*SOLID SECTION, ELSET=Eblock1, MATERIAL=Alu
+*SOLID SECTION, ELSET=Eblock2, MATERIAL=Alu
+**
+** Support
+*RIGID BODY, ELSET=Esupport, REF NODE=RefSup, ROT NODE=RotSup
+*RIGID BODY, ELSET=Epeen, REF NODE=RefPee, ROT NODE=RotPee
+**
+** Orientation
+******************
+*ORIENTATION, NAME=ORI1
+1, 0, 0, 1, 1, 0
+**
+** Materials
+******************
+** Alu
+*MATERIAL, NAME=Alu
+*ELASTIC
+72000, 0.27
+**
+** Ply
+*MATERIAL, NAME=Ply
+*ELASTIC, TYPE=ENGINEERING CONSTANTS
+146000, 9000, 9000, 0.2, 0.2, 0.6, 6800, 6800
+3400
+**

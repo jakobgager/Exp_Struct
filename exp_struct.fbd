@@ -55,15 +55,57 @@
     Swep block2 temp2 tra 30 0 0 16
     Setc block2
     
+    # support
+    Seto support
+    Pnt P12 -240.0 -33.0 -40.0
+    Pnt P12c -235.0 -33.0 -35.0
+    Pnt P13 -230.0 -33.0 -40.0
+    Pnt PC3 -235.0 -33.0 -40.0
+    Pnt P14 -230.0 -33.0 -45.0
+    Pnt P15 -240.0 -33.0 -45.0
+    Line L12 P12 P12c PC3 4
+    Line L13 P12c P13 PC3 4
+    Line L14 P13 P14 4
+    Line L15 P14 P15 4
+    Line L16 P15 P12 4
+    Surf S4 L12 L13 L14 L15 L16
+    Swep support temp tra 0 33.0 0 16
+    Setc support
+    Node 100000 -235.0 -30.0 -40.0
+    Node 100001 -235.0 -30.0 -40.0
+
+    # peen
+    Seto peen
+    Pnt P16 -155.0 -33.0 43.0
+    Pnt P16c -150.0 -33.0 38.0
+    Pnt P17 -145.0 -33.0 43.0
+    Pnt PC4 -150.0 -33.0 43.0
+    Pnt P18 -145.0 -33.0 48.0
+    Pnt P19 -155.0 -33.0 48.0
+    Line L17 P16 P16c PC4 4
+    Line L18 P16c P17 PC4 4
+    Line L19 P17 P18 4
+    Line L20 P18 P19 4
+    Line L21 P19 P16 4
+    Surf S5 L17 L18 L19 L20 L21
+    Swep peen temp tra 0 33.0 0 16
+    Setc peen
+    Node 100002 -150.0 -30.0 43.0
+    Node 100003 -150.0 -30.0 43.0
+
     # Element types
     Elty struct_all qu8
     Elty block1 he20
     Elty block2 he20
+    Elty support he8
+    Elty peen he8
     
     Mesh struct_all
     Mesh block1
     Merg n all
     Mesh block2
+    Mesh support
+    Mesh peen
     
     Seta Sym_X l L00I L00H L5
     Seta Sym_Y l L00G L00M 
@@ -80,4 +122,15 @@
     plus e block1 m
     plus e block2 b
     plus e struct_all g
+    plus e support k
+    plus e peen k
+
+    # write mesh
+    send struct_all abq
+    send block1 abq
+    send block2 abq
+    send support abq
+    send peen abq
+    send Sym_X abq names
+    send Sym_Y abq names
     

@@ -17,10 +17,14 @@ structure = {
 'lc' : 220,
 # support width
 'ls' : 470,
+# support radius
+'rs' : 5,
 # support block width
 'la' : 30,
 # loading peen width
 'lf' : 300,
+# loading peen radius
+'rf' : 5,
 # peen block width
 'wd' : 30,
 # peen block thickness
